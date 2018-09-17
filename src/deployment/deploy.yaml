@@ -1,0 +1,47 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  fileapisvc
+spec:
+  selector:
+    app:  fileapi
+  type:  LoadBalancer
+  ports:
+  - name:  http
+    port:  80
+    targetPort:  80
+    protocol: TCP
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: fileapibackend
+spec:
+  replicas: 2
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: fileapi
+    spec:
+      containers:
+      - name: fileapi
+        image: <your regitry name>.azurecr.io/fileapi
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name:  azureshare
+            mountPath:  /share
+      imagePullSecrets:
+        - name:  <your image registry secrets>
+      volumes:
+        - name:  azureshare
+          azureFile:
+            secretName: azureshare-secret
+            shareName: <your Azure file share name>
+            readOnly: false

@@ -3,3 +3,8 @@
 ################################################################################
 
 /src/fileapi/.vs
+/src/fileapi/bin/Debug
+/src/fileapi/obj
+/src/fileapi/fileapi.csproj.user
+/src/fileapi/Properties
+/src/deployment/privatedeploy.yaml
