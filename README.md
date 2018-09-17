@@ -79,7 +79,7 @@ kubectl create secret generic azure-secret --from-literal=azurestorageaccountnam
 
 ### Mount file share as volume
 
-In the deployment directory you can see the following yaml file that describes the ![deployment](src/deployment/deployment.yaml) of the example application. Please replace all variables between <> with your values. 
+In the deployment directory you can see the following yaml file that describes the [deployment](src/deployment/deployment.yaml) of the example application. Please replace all variables between <> with your values. 
 
 ``` yaml
 kind: Service
